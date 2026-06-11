@@ -1,0 +1,6 @@
+/build
+
+# AI 모델 파일
+src/main/assets/*.tflite
+src/main/assets/*.onnx
+src/main/assets/*.pb
