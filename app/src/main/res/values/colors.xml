@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- 브랜드 -->
+    <color name="primary">#5FBD8C</color>
+    <color name="primary_deep">#42A471</color>
+    <color name="primary_soft">#EEF8F1</color>
+    <color name="primary_tint">#DCF1E5</color>
+    <color name="expense">#F4868C</color>
+    <color name="ink">#1B211C</color>
+
+    <!-- 중립 -->
+    <color name="bg_app">#F6F8F6</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="border">#F0F2EF</color>
+    <color name="text_sub">#7C857D</color>
+    <color name="text_muted">#9AA29B</color>
+    <color name="disabled">#C8CFC8</color>
+
+    <!-- 카테고리 -->
+    <color name="category_meal">#F4868C</color>
+    <color name="category_meal_bg">#FEE2E2</color>
+    <color name="category_grocery">#F8C06B</color>
+    <color name="category_grocery_bg">#FEF3C7</color>
+    <color name="category_transport">#3B82F6</color>
+    <color name="category_transport_bg">#DBEAFE</color>
+    <color name="category_cafe">#B6A6EE</color>
+    <color name="category_etc">#CBD3CB</color>
 </resources>
