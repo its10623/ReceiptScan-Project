@@ -26,4 +26,7 @@ val CategoryGroceryBg  = Color(0xFFFEF3C7)
 val CategoryTransport  = Color(0xFF3B82F6)
 val CategoryTransportBg= Color(0xFFDBEAFE)
 val CategoryCafe       = Color(0xFFB6A6EE)
+val CategoryCafeBg     = Color(0XFFEDE8FB)
 val CategoryEtc        = Color(0xFFCBD3CB)
+val CategoryEtcBg      = Color(0xFFEAECEA)
+
