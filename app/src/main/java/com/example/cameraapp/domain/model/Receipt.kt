@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 
 data class Receipt(
     val id: Long? = null,
+    val category: Category? = null,
     val storeName: String? = null,
     val purchasedAt: LocalDateTime,
     val totalPrice: Int,
