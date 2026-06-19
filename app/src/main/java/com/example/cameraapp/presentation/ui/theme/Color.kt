@@ -9,6 +9,7 @@ val PrimarySoft  = Color(0xFFEEF8F1)
 val PrimaryTint  = Color(0xFFDCF1E5)
 val Expense      = Color(0xFFF4868C)
 val Ink          = Color(0xFF1B211C)
+val ModalBg      = Color(0x80141C17)
 
 // ── 중립 (Neutral) ────────────────────────────────
 val BgApp        = Color(0xFFF6F8F6)
