@@ -31,3 +31,11 @@ keystore.properties
 
 # 디자인 프리뷰 (개발 참고용)
 design_preview.html
+
+# Claude Code
+.claude/settings.local.json
+AGENTS.md
+Design.md
+
+# ktlint 캐시
+.ktlint-baseline.xml

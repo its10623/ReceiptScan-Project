@@ -1,23 +1,22 @@
-import org.jetbrains.kotlin.ir.util.toIrConst
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ktlint)
 }
 
 android {
-    namespace  = "com.example.cameraapp"
+    namespace = "com.example.cameraapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId         = "com.example.cameraapp"
-        minSdk                = 26   // ARCore 최소 요구사항 24, Z Flip4(API 34) 지원
-        targetSdk             = 35
-        versionCode           = 1
-        versionName           = "1.0"
+        applicationId = "com.example.cameraapp"
+        minSdk = 26 // ARCore 최소 요구사항 24, Z Flip4(API 34) 지원
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
