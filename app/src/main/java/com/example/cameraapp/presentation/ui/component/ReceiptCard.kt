@@ -35,7 +35,7 @@ fun ReceiptCard(
     receipt: Receipt,
     onClick: (Receipt) -> Unit,
 ) {
-    val formatTime = formatReceiptPurchaseAt(receipt.purchasedAt)
+    val formatTime = formatReceiptPurchaseAt(receipt.purchaseAt)
 
     Card(
         modifier =
@@ -89,7 +89,7 @@ fun ReceiptCard(
             }
 
             Text(
-                text = formatReceiptAmount(receipt.totalPrice, isIncome = false),
+                text = formatReceiptAmount(receipt.totalPrice ?: 0, isIncome = false),
                 style = MaterialTheme.typography.titleMedium,
             )
         }
