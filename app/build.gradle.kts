@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.camerax.camera2)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
+    implementation(libs.exifinterface)
 
     // ── TFLite (온디바이스 YOLO) ──────────────────────
     implementation(libs.tflite)
@@ -95,6 +96,11 @@ dependencies {
 
     // ── ML Kit (텍스트 인식) ──────────────────────────
     implementation(libs.mlkit.text.recognition.korean)
+
+    // ── Retrofit (네트워크) ──────────────────────────
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging)
 
     // ── Coroutines ───────────────────────────────────
     implementation(libs.kotlinx.coroutines.android)
