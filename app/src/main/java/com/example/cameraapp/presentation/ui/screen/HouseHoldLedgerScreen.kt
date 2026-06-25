@@ -92,69 +92,60 @@ fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
                 id = 1L,
                 category = Category.GROCERY,
                 storeName = "이마트 트레이더스",
-                purchasedAt = LocalDateTime.of(2026, 6, 17, 19, 24),
+                purchaseAt = "2026.06.17 19:24",
                 totalPrice = 118000,
                 items =
                     listOf(
                         ReceiptItem(
                             id = 1L,
-                            category = Category.GROCERY,
                             name = "올리브유",
                             price = 12900,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 2L,
-                            category = Category.GROCERY,
                             name = "계란 30구",
                             price = 8900,
                             quantity = 2,
                         ),
                         ReceiptItem(
                             id = 3L,
-                            category = Category.GROCERY,
                             name = "닭가슴살",
                             price = 15400,
                             quantity = 3,
                         ),
                         ReceiptItem(
                             id = 4L,
-                            category = Category.GROCERY,
                             name = "두유 24입",
                             price = 19800,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 5L,
-                            category = Category.GROCERY,
                             name = "화장지 30롤",
                             price = 23200,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 5L,
-                            category = Category.GROCERY,
                             name = "화장지 30롤",
                             price = 23200,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 5L,
-                            category = Category.GROCERY,
                             name = "화장지 30롤",
                             price = 23200,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 5L,
-                            category = Category.GROCERY,
                             name = "화장지 30롤",
                             price = 23200,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 5L,
-                            category = Category.GROCERY,
                             name = "화장지 30롤",
                             price = 23200,
                             quantity = 1,
@@ -167,20 +158,18 @@ fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
                 id = 2L,
                 category = Category.CAFE_SNACK,
                 storeName = "스타벅스 강남점",
-                purchasedAt = LocalDateTime.of(2026, 6, 17, 14, 10),
+                purchaseAt = "2026.06.17 14:10",
                 totalPrice = 8000,
                 items =
                     listOf(
                         ReceiptItem(
                             id = 6L,
-                            category = Category.CAFE_SNACK,
                             name = "아이스 아메리카노",
                             price = 5000,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 7L,
-                            category = Category.CAFE_SNACK,
                             name = "카스텔라",
                             price = 3000,
                             quantity = 1,
@@ -193,27 +182,24 @@ fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
                 id = 3L,
                 category = Category.MEAL,
                 storeName = "교촌치킨 서초점",
-                purchasedAt = LocalDateTime.of(2026, 6, 17, 18, 45),
+                purchaseAt = "2026.06.17 18:45",
                 totalPrice = 32000,
                 items =
                     listOf(
                         ReceiptItem(
                             id = 8L,
-                            category = Category.MEAL,
                             name = "허니콤보",
                             price = 23000,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 9L,
-                            category = Category.MEAL,
                             name = "콜라 1.25L",
                             price = 3000,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 10L,
-                            category = Category.MEAL,
                             name = "치즈볼",
                             price = 6000,
                             quantity = 1,
@@ -226,13 +212,12 @@ fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
                 id = 4L,
                 category = Category.TRANSPORT,
                 storeName = "카카오택시",
-                purchasedAt = LocalDateTime.of(2026, 6, 17, 9, 15),
+                purchaseAt = "2026.06.17 09:15",
                 totalPrice = 12400,
                 items =
                     listOf(
                         ReceiptItem(
                             id = 11L,
-                            category = Category.TRANSPORT,
                             name = "택시 요금",
                             price = 12400,
                             quantity = 1,
@@ -245,27 +230,24 @@ fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
                 id = 5L,
                 category = Category.MEAL,
                 storeName = "맥도날드 강남점",
-                purchasedAt = LocalDateTime.of(2026, 6, 17, 12, 30),
+                purchaseAt = "2026.06.17 12:30",
                 totalPrice = 15500,
                 items =
                     listOf(
                         ReceiptItem(
                             id = 12L,
-                            category = Category.MEAL,
                             name = "빅맥 세트",
                             price = 9200,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 13L,
-                            category = Category.MEAL,
                             name = "맥너겟 6조각",
                             price = 4300,
                             quantity = 1,
                         ),
                         ReceiptItem(
                             id = 14L,
-                            category = Category.MEAL,
                             name = "애플파이",
                             price = 2000,
                             quantity = 1,
