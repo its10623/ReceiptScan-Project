@@ -20,8 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
@@ -35,7 +35,7 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 fun CameraFab(
     onCamera: () -> Unit = {},
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     val scope = rememberCoroutineScope()
     var pressed by remember { mutableStateOf(false) }
@@ -43,17 +43,18 @@ fun CameraFab(
 
     val scale by animateFloatAsState(
         targetValue = if (pressed) 1.15f else 1f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        ),
-        label = ""
+        animationSpec =
+            spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow,
+            ),
+        label = "",
     )
 
     AnimatedVisibility(
         visible = fabVisible,
         enter = scaleIn() + fadeIn(),
-        exit = scaleOut() + fadeOut()
+        exit = scaleOut() + fadeOut(),
     ) {
         FloatingActionButton(
             onClick = {
@@ -67,24 +68,25 @@ fun CameraFab(
             },
             shape = RoundedCornerShape(40.dp),
             containerColor = Primary,
-            modifier = modifier
-                .scale(scale)
-                .size(64.dp)
-                .shadow(elevation = 8.dp, shape = CircleShape)
-                .border(
-                    width = 4.dp,
-                    color = Surface,
-                    shape = CircleShape,
-                )
+            modifier =
+                modifier
+                    .scale(scale)
+                    .size(64.dp)
+                    .shadow(elevation = 8.dp, shape = CircleShape)
+                    .border(
+                        width = 2.dp,
+                        color = Surface,
+                        shape = CircleShape,
+                    ),
         ) {
             Icon(
                 imageVector = Icons.Rounded.CameraAlt,
                 contentDescription = "카메라",
                 tint = Surface,
-                modifier = Modifier
-                    .size(35.dp)
+                modifier =
+                    Modifier
+                        .size(35.dp),
             )
         }
     }
-
 }

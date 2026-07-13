@@ -2,11 +2,11 @@ package com.example.cameraapp.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -16,13 +16,13 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     val currentState: State
         get() = uiState.value
 
-    private val _uiState : MutableStateFlow<State> = MutableStateFlow(createInitialState())
+    private val _uiState: MutableStateFlow<State> = MutableStateFlow(createInitialState())
     val uiState = _uiState.asStateFlow()
 
-    private val _uiEvent : MutableSharedFlow<Event> = MutableSharedFlow()
+    private val _uiEvent: MutableSharedFlow<Event> = MutableSharedFlow()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    private val _uiEffect : Channel<Effect> = Channel()
+    private val _uiEffect: Channel<Effect> = Channel()
     val uiEffect = _uiEffect.receiveAsFlow()
 
     init {
@@ -37,7 +37,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
         _uiState.value = currentState.reduce()
     }
 
-    protected  fun setEffect(builder: () -> Effect) {
+    protected fun setEffect(builder: () -> Effect) {
         viewModelScope.launch { _uiEffect.send(builder()) }
     }
 

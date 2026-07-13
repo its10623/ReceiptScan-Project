@@ -10,19 +10,24 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
-class ScanRepositoryImpl @Inject constructor(
-    private val receiptApi: ReceiptApi
-) : ScanRepository {
-    override suspend fun scanReceipt(file: File): Receipt {
-        val parseFile = fileToMultipartBody(file)
-        val response = receiptApi.scanReceipt(parseFile)
-        val receipt = response.body()?.receipt ?: throw Exception("스캔 실패")
-        return receipt.toDomain()
-    }
+class ScanRepositoryImpl
+    @Inject
+    constructor(
+        private val receiptApi: ReceiptApi,
+    ) : ScanRepository {
+        override suspend fun scanReceipt(file: File): Receipt {
+            val parseFile = fileToMultipartBody(file)
+            val response = receiptApi.scanReceipt(parseFile)
+            val receipt = response.body()?.receipt ?: throw Exception("스캔 실패")
+            return receipt.toDomain()
+        }
 
-    private fun fileToMultipartBody(file: File, key: String = "file"): MultipartBody.Part {
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        private fun fileToMultipartBody(
+            file: File,
+            key: String = "file",
+        ): MultipartBody.Part {
+            val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
 
-        return MultipartBody.Part.createFormData(key, file.name, requestBody)
+            return MultipartBody.Part.createFormData(key, file.name, requestBody)
+        }
     }
-}

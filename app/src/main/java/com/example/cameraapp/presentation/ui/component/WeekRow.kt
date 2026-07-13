@@ -12,19 +12,21 @@ import java.time.LocalDate
 fun WeekRow(
     days: List<LocalDate?>,
     selectedDate: LocalDate?,
-    onDetails: (LocalDate) -> Unit
+    onDetails: (LocalDate) -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 12.dp, end = 12.dp)) {
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(start = 12.dp, end = 12.dp),
+    ) {
         days.forEach { date ->
             DayCell(
                 date = date,
                 isToday = date == LocalDate.now(),
                 isSelected = date == selectedDate,
                 onClick = onDetails,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
         }
     }

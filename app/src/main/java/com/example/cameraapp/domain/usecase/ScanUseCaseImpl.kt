@@ -6,11 +6,11 @@ import java.io.File
 import javax.inject.Inject
 
 class ScanUseCaseImpl
-@Inject
-constructor(
-        private val scanRepository: ScanRepository
-) : ScanUseCase {
-    override suspend fun scanReceipt(file: File): Receipt {
-        return scanRepository.scanReceipt(file)
+    @Inject
+    constructor(
+        private val scanRepository: ScanRepository,
+    ) : ScanUseCase {
+        override suspend fun scanReceipt(file: File): Receipt {
+            return scanRepository.scanReceipt(file)
+        }
     }
-}

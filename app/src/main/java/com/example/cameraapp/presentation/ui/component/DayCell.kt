@@ -2,7 +2,6 @@ package com.example.cameraapp.presentation.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -11,7 +10,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,7 +24,6 @@ import com.example.cameraapp.presentation.ui.theme.PrimaryTint
 import com.example.cameraapp.presentation.ui.util.formatCalendarAmount
 import java.time.DayOfWeek
 import java.time.LocalDate
-import kotlin.math.floor
 
 @Composable
 fun DayCell(
@@ -36,7 +33,7 @@ fun DayCell(
     isSelected: Boolean = false,
     income: Int = 0,
     expense: Int = 0,
-    onClick: (LocalDate) -> Unit
+    onClick: (LocalDate) -> Unit,
 ) {
     if (date == null) {
         Box(modifier = modifier.aspectRatio(1f))
@@ -46,42 +43,46 @@ fun DayCell(
     val isSunday = date.dayOfWeek == DayOfWeek.SUNDAY
     val isSaturday = date.dayOfWeek == DayOfWeek.SATURDAY
 
-    val dateTextColor = when {
-        isToday -> Color.White
-        isSelected -> Primary
-        isSunday -> Expense
-        isSaturday -> CategoryTransport
-        else -> Ink
-    }
+    val dateTextColor =
+        when {
+            isToday -> Color.White
+            isSelected -> Primary
+            isSunday -> Expense
+            isSaturday -> CategoryTransport
+            else -> Ink
+        }
 
     Box(
-        modifier = modifier
-            .aspectRatio(1f),
-        contentAlignment = Alignment.TopCenter
+        modifier =
+            modifier
+                .aspectRatio(1f),
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Box(
-                modifier = Modifier
-                    .size(28.dp)
-                    .clip(CircleShape)
-                    .clickable{ onClick(date) }
-                    .background(
-                        color = when {
-                            isToday -> Primary
-                            isSelected -> PrimaryTint
-                            else -> Color.Transparent
-                        },
-                        shape = CircleShape
-                    ),
-                contentAlignment = Alignment.Center
+                modifier =
+                    Modifier
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .clickable { onClick(date) }
+                        .background(
+                            color =
+                                when {
+                                    isToday -> Primary
+                                    isSelected -> PrimaryTint
+                                    else -> Color.Transparent
+                                },
+                            shape = CircleShape,
+                        ),
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = date.dayOfMonth.toString(),
                     style = MaterialTheme.typography.labelSmall,
                     color = dateTextColor,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
 
@@ -91,7 +92,7 @@ fun DayCell(
                     style = MaterialTheme.typography.labelMedium,
                     color = Primary,
                     maxLines = 1,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
 
@@ -101,11 +102,9 @@ fun DayCell(
                     style = MaterialTheme.typography.labelMedium,
                     color = Expense,
                     maxLines = 1,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
             }
         }
     }
 }
-
-

@@ -1,12 +1,9 @@
 package com.example.cameraapp.presentation.ui.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -24,7 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,7 +39,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cameraapp.R
 import com.example.cameraapp.presentation.ui.component.PrimaryButton
-import com.example.cameraapp.presentation.ui.theme.BgApp
 import com.example.cameraapp.presentation.ui.theme.Border
 import com.example.cameraapp.presentation.ui.theme.CameraAppTheme
 import com.example.cameraapp.presentation.ui.theme.Expense
@@ -52,197 +47,208 @@ import com.example.cameraapp.presentation.ui.theme.TextSub
 
 @Composable
 @Preview
-fun LoginScreen(
-
-) {
+fun LoginScreen() {
     var email by remember { mutableStateOf("test@test.com") }
     var password by remember { mutableStateOf("test20260615!") }
 
     var passwordVisible by remember { mutableStateOf(false) }
 
-
     val focusManager = LocalFocusManager.current
 
-    CameraAppTheme {
-        Scaffold(
-            modifier = Modifier
+    Scaffold(
+        modifier =
+            Modifier
                 .fillMaxSize()
                 .clickable(
                     indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
+                    interactionSource = remember { MutableInteractionSource() },
                 ) {
                     focusManager.clearFocus()
-                }
-        ) { paddingValues ->
-            Column(
-                modifier = Modifier
+                },
+    ) { paddingValues ->
+        Column(
+            modifier =
+                Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            Image(
+                painter = painterResource(R.drawable.ic_logo),
+                contentDescription = "앱 로고",
+                modifier =
+                    Modifier
+                        .size(70.dp),
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "찰칵 가계부",
+                style = MaterialTheme.typography.displayMedium,
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = "영수증 찍으면 AI가 알아서 정리",
+                style = MaterialTheme.typography.bodySmall,
+                color = TextSub,
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Row(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = 32.dp, bottom = 10.dp),
+                horizontalArrangement = Arrangement.Start,
             ) {
-                Spacer(modifier = Modifier.weight(1f))
-
-                Image(
-                    painter = painterResource(R.drawable.ic_logo),
-                    contentDescription = "앱 로고",
-                    modifier = Modifier
-                        .size(70.dp)
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
                 Text(
-                    text = "찰칵 가계부",
-                    style = MaterialTheme.typography.displayMedium
+                    text = "이메일",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = TextSub,
                 )
+            }
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    text = "영수증 찍으면 AI가 알아서 정리",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = TextSub
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 32.dp, bottom = 10.dp),
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    Text(
-                        text = "이메일",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = TextSub,
-                    )
-                }
-
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    modifier = Modifier
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                modifier =
+                    Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 32.dp),
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    singleLine = true,
-                    isError = false,
-                    shape = RoundedCornerShape(12.dp),
-                    colors = TextFieldDefaults.colors(
+                textStyle = MaterialTheme.typography.bodyMedium,
+                singleLine = true,
+                isError = false,
+                shape = RoundedCornerShape(12.dp),
+                colors =
+                    TextFieldDefaults.colors(
                         focusedIndicatorColor = Primary,
                         unfocusedIndicatorColor = Border,
                         focusedContainerColor = Color.Transparent,
                         unfocusedContainerColor = Color.Transparent,
                         disabledContainerColor = Color.Transparent,
                         errorContainerColor = Color.Transparent,
-                        errorCursorColor = Expense
-                    )
-                )
+                        errorCursorColor = Expense,
+                    ),
+            )
 
-                Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-                Row(
-                    modifier = Modifier
+            Row(
+                modifier =
+                    Modifier
                         .fillMaxWidth()
                         .padding(start = 32.dp, bottom = 10.dp),
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    Text(
-                        text = "비밀번호",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = TextSub,
-                    )
-                }
+                horizontalArrangement = Arrangement.Start,
+            ) {
+                Text(
+                    text = "비밀번호",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = TextSub,
+                )
+            }
 
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    modifier = Modifier
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                modifier =
+                    Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 32.dp),
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    singleLine = true,
-                    isError = false,
-                    visualTransformation = if (passwordVisible) {
+                textStyle = MaterialTheme.typography.bodyMedium,
+                singleLine = true,
+                isError = false,
+                visualTransformation =
+                    if (passwordVisible) {
                         VisualTransformation.None
-                    } else PasswordVisualTransformation(),
-                    trailingIcon = {
-                        TextButton(
-                            onClick = { passwordVisible = !passwordVisible }
-                        ) {
-                            Text(
-                                text = "보기",
-                                color = TextSub,
-                                style = MaterialTheme.typography.bodyMedium
-                            )
-                        }
+                    } else {
+                        PasswordVisualTransformation()
                     },
-                    shape = RoundedCornerShape(12.dp),
-                    colors = TextFieldDefaults.colors(
+                trailingIcon = {
+                    TextButton(
+                        onClick = { passwordVisible = !passwordVisible },
+                    ) {
+                        Text(
+                            text = "보기",
+                            color = TextSub,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
+                },
+                shape = RoundedCornerShape(12.dp),
+                colors =
+                    TextFieldDefaults.colors(
                         focusedIndicatorColor = Primary,
                         unfocusedIndicatorColor = Border,
                         focusedContainerColor = Color.Transparent,
                         unfocusedContainerColor = Color.Transparent,
                         disabledContainerColor = Color.Transparent,
                         errorContainerColor = Color.Transparent,
-                        errorCursorColor = Expense
-                    )
-                )
+                        errorCursorColor = Expense,
+                    ),
+            )
 
-                Row(
-                    modifier = Modifier
+            Row(
+                modifier =
+                    Modifier
                         .fillMaxWidth()
                         .padding(end = 32.dp),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {},
-                    ) {
-                        Text(
-                            text = "비밀번호를 잊어버리셨나요?",
-                            color = TextSub,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-                }
-
-                PrimaryButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(32.dp),
-                    enabled = email.isNotBlank() && password.isNotBlank()
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.End,
+            ) {
+                TextButton(
+                    onClick = {},
                 ) {
                     Text(
-                        text = "아직 회원이 아니신가요?",
+                        text = "비밀번호를 잊어버리셨나요?",
                         color = TextSub,
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
                     )
-                    TextButton(
-                        onClick = {},
-                        contentPadding = PaddingValues(0.dp)
-                    ) {
-                        Text(
-                            text = "회원가입",
-                            color = Primary,
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
+                }
+            }
+
+            PrimaryButton(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                enabled = email.isNotBlank() && password.isNotBlank(),
+                text = "로그인",
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "아직 회원이 아니신가요?",
+                    color = TextSub,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                TextButton(
+                    onClick = {},
+                    contentPadding = PaddingValues(0.dp),
+                ) {
+                    Text(
+                        text = "회원가입",
+                        color = Primary,
+                        style = MaterialTheme.typography.bodySmall,
+                    )
                 }
             }
         }

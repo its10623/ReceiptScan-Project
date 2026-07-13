@@ -21,25 +21,26 @@ fun NavIcon(
     text: String,
     icon: ImageVector,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Column(
-        modifier = modifier
-            .clip(CircleShape)
-            .clickable { onClick() },
+        modifier =
+            modifier
+                .clip(CircleShape)
+                .clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Icon(
             imageVector = icon,
             contentDescription = text,
             modifier = Modifier.size(24.dp),
-            tint = TextSub
+            tint = TextSub,
         )
         Text(
             text = text,
             style = MaterialTheme.typography.labelSmall,
-            color = TextSub
+            color = TextSub,
         )
     }
 }

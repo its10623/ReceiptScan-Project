@@ -13,30 +13,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.cameraapp.presentation.ui.theme.PrimarySoft
-import com.example.cameraapp.presentation.ui.theme.PrimaryTint
-import com.example.cameraapp.presentation.ui.theme.Surface
 
 @Composable
-fun SummaryItemCard (
+fun SummaryItemCard(
     label: String,
     amount: String,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.16f),
-            contentColor = Color.White
-        )
-
+        colors =
+            CardDefaults.cardColors(
+                containerColor = Color.White.copy(alpha = 0.16f),
+                contentColor = Color.White,
+            ),
     ) {
         Column(
-            modifier = Modifier
-                .padding(12.dp),
+            modifier =
+                Modifier
+                    .padding(12.dp),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
         ) {
             Text(
                 text = label,
@@ -45,7 +43,7 @@ fun SummaryItemCard (
 
             Text(
                 text = amount,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }
