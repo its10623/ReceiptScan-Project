@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cameraapp"
-        minSdk = 26 // ARCore 최소 요구사항 24, Z Flip4(API 34) 지원
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -108,6 +108,7 @@ dependencies {
     // ── Serialization ────────────────────────────────
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(libs.lottie.compose)
     // ── Test ─────────────────────────────────────────
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
