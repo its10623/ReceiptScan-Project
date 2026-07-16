@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,7 +16,6 @@ import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,8 +36,6 @@ import com.example.cameraapp.domain.model.Category
 import com.example.cameraapp.domain.model.DayInfo
 import com.example.cameraapp.domain.model.Receipt
 import com.example.cameraapp.domain.model.ReceiptItem
-import com.example.cameraapp.presentation.ui.component.BottomNavigationBar
-import com.example.cameraapp.presentation.ui.component.CameraFab
 import com.example.cameraapp.presentation.ui.component.MonthSummaryCard
 import com.example.cameraapp.presentation.ui.component.ReceiptCard
 import com.example.cameraapp.presentation.ui.component.ReceiptDetailBottomSheet
@@ -266,14 +262,8 @@ fun LedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
             onDismiss = { selectedReceipt = null },
         )
     }
-
     Scaffold(
         containerColor = BgApp,
-        bottomBar = { BottomNavigationBar() },
-        floatingActionButton = {
-            CameraFab(modifier = Modifier.offset(y = 28.dp))
-        },
-        floatingActionButtonPosition = FabPosition.Center,
         modifier =
             Modifier
                 .fillMaxSize()
