@@ -40,17 +40,11 @@ fun SecondaryButton(
                 .scale(scale),
         interactionSource = interactionSource,
         shape = RoundedCornerShape(16.dp),
-        elevation =
-            ButtonDefaults.buttonElevation(
-                defaultElevation = 8.dp,
-                pressedElevation = 8.dp,
-            ),
         colors =
             ButtonDefaults.buttonColors(
                 contentColor = TextSub,
-                containerColor = BgApp,
+                containerColor = TextSub.copy(alpha = 0.1f),
             ),
-        border = BorderStroke(1.dp, Border),
     ) {
         Text(
             text = text,

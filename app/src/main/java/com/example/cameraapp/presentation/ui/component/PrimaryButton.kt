@@ -39,16 +39,11 @@ fun PrimaryButton(
                 .scale(scale),
         interactionSource = interactionSource,
         shape = RoundedCornerShape(16.dp),
-        elevation =
-            ButtonDefaults.buttonElevation(
-                defaultElevation = 8.dp,
-                pressedElevation = 8.dp,
-            ),
+
         colors =
             ButtonDefaults.buttonColors(
                 contentColor = Surface,
             ),
-        border = BorderStroke(1.dp, Border),
     ) {
         Text(
             text = text,
