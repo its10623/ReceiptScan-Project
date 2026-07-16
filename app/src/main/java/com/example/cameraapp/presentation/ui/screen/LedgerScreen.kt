@@ -58,7 +58,7 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun HouseHoldLedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
+fun LedgerScreen(onDetails: (LocalDate) -> Unit = {}) {
     val focusManager = LocalFocusManager.current
     var yearMonth by remember { mutableStateOf(YearMonth.now()) }
     val formatter = DateTimeFormatter.ofPattern("yyyy년 M월")
