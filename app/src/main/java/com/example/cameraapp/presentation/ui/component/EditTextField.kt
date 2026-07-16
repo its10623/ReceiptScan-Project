@@ -1,15 +1,13 @@
 package com.example.cameraapp.presentation.ui.component
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,40 +18,62 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.cameraapp.presentation.ui.theme.Border
 import com.example.cameraapp.presentation.ui.theme.Expense
 import com.example.cameraapp.presentation.ui.theme.Primary
 import com.example.cameraapp.presentation.ui.theme.Shape
-import com.example.cameraapp.presentation.ui.theme.TextSub
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditTextField(
     label: String,
     modifier: Modifier,
+    paddingValues: PaddingValues = PaddingValues(),
+    textAlign: TextAlign = TextAlign.Start
 ) {
-    var name by remember { mutableStateOf(label) }
+    var text by remember { mutableStateOf(label) }
     val focusManager = LocalFocusManager.current
+    val interactionSource = remember { MutableInteractionSource() }
 
-    OutlinedTextField(
-        value = name,
-        onValueChange = { name = it },
+    BasicTextField(
+        value = text,
+        onValueChange = { text = it },
         keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        interactionSource = interactionSource,
         modifier = modifier,
-        textStyle = MaterialTheme.typography.bodyMedium,
+        textStyle = MaterialTheme.typography.bodyMedium.copy(textAlign = textAlign),
         singleLine = true,
-        isError = false,
-        shape = Shape.Field,
-        colors =
-            TextFieldDefaults.colors(
-                focusedIndicatorColor = Primary,
-                unfocusedIndicatorColor = Border.copy(alpha = 0.4f),
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                disabledContainerColor = Color.Transparent,
-                errorContainerColor = Color.Transparent,
-                errorCursorColor = Expense,
-            ),
+        decorationBox = { innerTextField ->
+            OutlinedTextFieldDefaults.DecorationBox(
+                value = text,
+                innerTextField = innerTextField,
+                enabled = true,
+                singleLine = true,
+                visualTransformation = VisualTransformation.None,
+                interactionSource = interactionSource,
+                contentPadding = paddingValues,
+                container = {
+                    OutlinedTextFieldDefaults.Container(
+                        enabled = true,
+                        isError = false,
+                        interactionSource = interactionSource,
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = Primary,
+                            unfocusedBorderColor = Border.copy(alpha = 0.4f),
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            disabledContainerColor = Color.Transparent,
+                            errorContainerColor = Color.Transparent,
+                            errorCursorColor = Expense,
+                        ),
+                        shape = Shape.Field,
+                    )
+                }
+            )
+        }
     )
 }
