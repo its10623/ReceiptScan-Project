@@ -1,5 +1,6 @@
 package com.example.cameraapp.presentation.ui.util
 
+import org.checkerframework.checker.units.qual.Time
 import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -40,10 +41,7 @@ fun formatItemAmount(amount: Int): String {
     return "${formatter.format(amount)}원"
 }
 
-fun formatReceiptPurchaseAt(time: LocalDateTime): String {
-    val timeFormatter = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
-    return time.format(timeFormatter)
-}
+fun formatReceiptPurchaseAt(time: String?): String = time ?: "-"
 
 fun formatTodayInfo(today: LocalDate): String {
     val todayFormatter = DateTimeFormatter.ofPattern("M월 d일 E요일", Locale.KOREAN)
@@ -54,3 +52,19 @@ fun formatDayOfMonth(today: LocalDateTime): String {
     val todayFormatter = DateTimeFormatter.ofPattern("M월 d일 · a h:mm", Locale.KOREAN)
     return today.format(todayFormatter)
 }
+
+fun formatDate(date: LocalDateTime): String {
+    val todayFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN)
+    return date.format(todayFormatter)
+}
+
+fun formatTime(time: LocalDateTime): String {
+    val todayFormatter = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
+    return time.format(todayFormatter)
+}
+
+fun formatPurchaseAt(today: LocalDateTime): String {
+    val todayFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E) a h:mm", Locale.KOREAN)
+    return today.format(todayFormatter)
+}
+
