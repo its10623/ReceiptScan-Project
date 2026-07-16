@@ -65,9 +65,6 @@ fun ReceiptDetailBottomSheet(
             skipPartiallyExpanded = true,
         )
 
-    var expanded by remember { mutableStateOf(false) }
-    val visibleItems = if (expanded) receipt.items else receipt.items.take(5)
-
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
@@ -237,74 +234,17 @@ fun ReceiptDetailBottomSheet(
                             .padding(end = 2.dp),
                 )
             }
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-            ) {
-                items(visibleItems) { item ->
-                    Row(
-                        modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 20.dp, vertical = 12.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Column {
-                            Text(
-                                text = item.name ?: "인식 오류",
-                                style = MaterialTheme.typography.bodyLarge,
-                            )
-                            Text(
-                                text = "${item.quantity}개 · ${formatItemAmount(item.price)}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = TextSub,
-                            )
-                        }
-                        Text(
-                            text = formatItemAmount(item.price),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                    }
-                    HorizontalDivider(
-                        modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 20.dp),
-                        thickness = 1.dp,
-                        color = Border,
-                    )
-                }
-                item {
-                    Row(
-                        modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        if (receipt.items.size > 5) {
-                            Text(
-                                text = if (expanded) "접기" else "${receipt.items.size - 5}개 항목 더보기",
-                                modifier = Modifier.clickable { expanded = !expanded },
-                                style = MaterialTheme.typography.bodySmall,
-                                color = TextSub,
-                            )
-                            Icon(
-                                imageVector = if (expanded) Icons.Rounded.KeyboardArrowUp else Icons.Rounded.KeyboardArrowDown,
-                                contentDescription = "",
-                                tint = TextSub,
-                            )
-                        }
-                    }
-                }
-            }
+            ReceiptItemList(
+                modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()),
+                receipt = receipt,
+                5,
+            )
             HorizontalDivider(
                 modifier =
                     Modifier
                         .fillMaxWidth(),
                 thickness = 1.dp,
-                color = Border,
+                color = Border.copy(alpha = 0.3f),
             )
 
             Row(
