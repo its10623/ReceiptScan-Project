@@ -37,6 +37,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,6 +49,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.example.cameraapp.domain.model.Category
@@ -154,7 +156,6 @@ fun ResultEditScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .imePadding()
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = null,
@@ -211,6 +212,7 @@ fun ResultEditScreen(
                             EditTextField(
                                 label = storeName,
                                 modifier = Modifier.fillMaxWidth(),
+                                paddingValues = PaddingValues(horizontal = 12.dp, vertical = 16.dp)
                             )
                             Row(
                                 modifier = Modifier
@@ -227,6 +229,10 @@ fun ResultEditScreen(
                                     EditTextField(
                                         label = date,
                                         modifier = Modifier.fillMaxWidth(),
+                                        paddingValues = PaddingValues(
+                                            horizontal = 12.dp,
+                                            vertical = 16.dp
+                                        )
                                     )
                                 }
                                 Spacer(modifier = Modifier.width(24.dp))
@@ -240,13 +246,17 @@ fun ResultEditScreen(
                                     EditTextField(
                                         label = time,
                                         modifier = Modifier.fillMaxWidth(),
+                                        paddingValues = PaddingValues(
+                                            horizontal = 12.dp,
+                                            vertical = 16.dp
+                                        )
                                     )
                                 }
                             }
                             Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 8.dp),
+                                    .padding(),
                             ) {
                                 Text(
                                     text = "구분",
@@ -341,54 +351,65 @@ fun ResultEditScreen(
                     ) {
                         Column(modifier = Modifier.fillMaxWidth()) {
                             items.forEachIndexed { index, item ->
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(
-                                            start = 12.dp,
-                                            end = 4.dp,
-                                            top = 12.dp,
-                                            bottom = 12.dp
-                                        ),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-                                    Box(
+                                key(item.id) {
+                                    Row(
                                         modifier = Modifier
-                                            .clip(Shape.Chip)
-                                            .background(Expense.copy(alpha = 0.15f))
-                                            .clickable(
-                                                interactionSource = remember { MutableInteractionSource() },
-                                                indication = null
-                                            ) {
-                                                items.removeAt(index)
-                                            }
-                                            .size(20.dp)
-                                            .align(Alignment.CenterVertically)
+                                            .fillMaxWidth()
+                                            .padding(12.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
                                     ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.Remove,
-                                            contentDescription = "품목 삭제",
-                                            tint = Expense.copy(alpha = 0.8f),
+                                        Box(
                                             modifier = Modifier
+                                                .clip(Shape.Chip)
+                                                .background(Expense.copy(alpha = 0.15f))
+                                                .clickable(
+                                                    interactionSource = remember { MutableInteractionSource() },
+                                                    indication = null
+                                                ) {
+                                                    items.removeAt(index)
+                                                }
                                                 .size(20.dp)
+                                                .align(Alignment.CenterVertically)
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Rounded.Remove,
+                                                contentDescription = "품목 삭제",
+                                                tint = Expense.copy(alpha = 0.8f),
+                                                modifier = Modifier
+                                                    .size(20.dp)
+                                            )
+                                        }
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        EditTextField(
+                                            label = item.name ?: "",
+                                            modifier = Modifier.width(160.dp),
+                                            paddingValues = PaddingValues(
+                                                horizontal = 12.dp,
+                                                vertical = 8.dp
+                                            ),
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        EditTextField(
+                                            label = item.quantity.toString(),
+                                            modifier = Modifier
+                                                .width(50.dp),
+                                            paddingValues = PaddingValues(
+                                                horizontal = 12.dp,
+                                                vertical = 8.dp
+                                            ),
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        EditTextField(
+                                            label = item.price?.toString() ?: "0",
+                                            modifier = Modifier.width(120.dp),
+                                            paddingValues = PaddingValues(
+                                                horizontal = 12.dp,
+                                                vertical = 8.dp
+                                            ),
+                                            textAlign = TextAlign.End
                                         )
                                     }
-                                    EditTextField(
-                                        label = item.name ?: "",
-                                        modifier = Modifier.fillMaxWidth(),
-                                    )
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    EditTextField(
-                                        label = item.price?.toString() ?: "0",
-                                        modifier = Modifier.fillMaxWidth(),
-                                    )
-
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    EditTextField(
-                                        label = item.quantity.toString(),
-                                        modifier = Modifier.fillMaxWidth(),
-                                    )
-
                                 }
 
                                 if (index < items.lastIndex) {
