@@ -1,7 +1,6 @@
 package com.example.cameraapp.presentation.ui.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,15 +8,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -27,10 +24,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,12 +38,10 @@ import com.example.cameraapp.presentation.ui.theme.Border
 import com.example.cameraapp.presentation.ui.theme.Expense
 import com.example.cameraapp.presentation.ui.theme.ModalBg
 import com.example.cameraapp.presentation.ui.theme.Primary
-import com.example.cameraapp.presentation.ui.theme.PrimarySoft
 import com.example.cameraapp.presentation.ui.theme.Shape
 import com.example.cameraapp.presentation.ui.theme.Surface
 import com.example.cameraapp.presentation.ui.theme.TextSub
 import com.example.cameraapp.presentation.ui.util.formatDayOfMonth
-import com.example.cameraapp.presentation.ui.util.formatItemAmount
 import com.example.cameraapp.presentation.ui.util.formatReceiptAmount
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -178,7 +169,7 @@ fun ReceiptDetailBottomSheet(
                 )
 
                 Text(
-                    text = formatReceiptAmount(receipt.totalPrice, isIncome = false),
+                    text = formatReceiptAmount(receipt.totalPrice ?: 0, isIncome = false),
                     style = MaterialTheme.typography.displayLarge,
                     color = Expense,
                 )
@@ -189,7 +180,7 @@ fun ReceiptDetailBottomSheet(
                     Modifier
                         .fillMaxWidth(),
                 thickness = 1.dp,
-                color = Border,
+                color = Border.copy(alpha = 0.3f),
             )
             Row(
                 modifier =
@@ -199,21 +190,7 @@ fun ReceiptDetailBottomSheet(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Box(
-                    modifier =
-                        Modifier
-                            .clip(shape = RoundedCornerShape(6.dp))
-                            .background(PrimarySoft)
-                            .padding(horizontal = 4.dp, vertical = 2.dp),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        text = "✦",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Primary,
-                    )
-                }
-
+                AiMark()
                 Text(
                     text = "AI가 ${receipt.items.size}개 품목을 인식했어요",
                     style = MaterialTheme.typography.bodySmall,
