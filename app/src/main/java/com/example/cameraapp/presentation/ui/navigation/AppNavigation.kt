@@ -20,7 +20,7 @@ fun AppNavigation() {
         composable<Screen.Camera> {
             CameraPreview(
                 onImageCaptured = { file ->
-                    scanViewModel.setEvent(ScanContract.Event.StartScan(file))
+                    scanViewModel.handleIntent(ScanContract.Intent.StartScan(file))
                     navController.navigate("scanning")
                 },
             )

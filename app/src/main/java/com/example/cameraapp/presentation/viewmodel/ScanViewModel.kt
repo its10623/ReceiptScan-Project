@@ -22,13 +22,13 @@ class ScanViewModel
     constructor(
         private val scanUseCase: ScanUseCase,
     ) :
-    BaseViewModel<ScanContract.Event, ScanContract.State, ScanContract.Effect>() {
+    BaseViewModel<ScanContract.Intent, ScanContract.State, ScanContract.SideEffect>() {
         override fun createInitialState() = ScanContract.State()
 
-        override fun handleEvent(event: ScanContract.Event) {
-            when (event) {
-                is ScanContract.Event.StartScan -> {
-                    scanReceipt(event.file)
+        override fun onIntent(intent: ScanContract.Intent) {
+            when (intent) {
+                is ScanContract.Intent.StartScan -> {
+                    scanReceipt(intent.file)
                 }
             }
         }
@@ -67,11 +67,11 @@ class ScanViewModel
                     updateStep(CATEGORY_CLASSIFICATION, DONE)
 
                     setState { copy(receipt = receipt) }
-                    setEffect { ScanContract.Effect.NavigateToResult(receipt) }
+                    setSideEffect { ScanContract.SideEffect.NavigateToResult(receipt) }
                     setState { copy(isLoading = false) }
                 } catch (e: Exception) {
                     setState { copy(isLoading = false) }
-                    setEffect { ScanContract.Effect.ShowError("${e.message}") }
+                    setSideEffect { ScanContract.SideEffect.ShowError("${e.message}") }
                 }
             }
         }

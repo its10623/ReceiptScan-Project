@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect> : ViewModel() {
+abstract class BaseViewModel<Intent : UiIntent, State : UiState, SideEffect : UiSideEffect> : ViewModel() {
     abstract fun createInitialState(): State
 
     val currentState: State
@@ -19,35 +19,35 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     private val _uiState: MutableStateFlow<State> = MutableStateFlow(createInitialState())
     val uiState = _uiState.asStateFlow()
 
-    private val _uiEvent: MutableSharedFlow<Event> = MutableSharedFlow()
-    val uiEvent = _uiEvent.asSharedFlow()
+    private val _uiIntent: MutableSharedFlow<Intent> = MutableSharedFlow()
+    val uiIntent = _uiIntent.asSharedFlow()
 
-    private val _uiEffect: Channel<Effect> = Channel()
-    val uiEffect = _uiEffect.receiveAsFlow()
+    private val _uiSideEffect: Channel<SideEffect> = Channel()
+    val uiSideEffect = _uiSideEffect.receiveAsFlow()
 
     init {
-        subscribeEvents()
+        subscribeIntents()
     }
 
-    fun setEvent(event: Event) {
-        viewModelScope.launch { _uiEvent.emit(event) }
+    fun handleIntent(intent: Intent) {
+        viewModelScope.launch { _uiIntent.emit(intent) }
     }
 
     protected fun setState(reduce: State.() -> State) {
         _uiState.value = currentState.reduce()
     }
 
-    protected fun setEffect(builder: () -> Effect) {
-        viewModelScope.launch { _uiEffect.send(builder()) }
+    protected fun setSideEffect(builder: () -> SideEffect) {
+        viewModelScope.launch { _uiSideEffect.send(builder()) }
     }
 
-    private fun subscribeEvents() {
+    private fun subscribeIntents() {
         viewModelScope.launch {
-            uiEvent.collect {
-                handleEvent(it)
+            uiIntent.collect {
+                onIntent(it)
             }
         }
     }
 
-    abstract fun handleEvent(event: Event)
+    abstract fun onIntent(intent: Intent)
 }
