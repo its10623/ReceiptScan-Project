@@ -27,6 +27,7 @@ import com.example.cameraapp.presentation.ui.component.Dialog
 
 @Composable
 fun MainScreen(
+    userKey: String,
     onNavigateToCamera: () -> Unit
 ) {
     val context = LocalContext.current
@@ -80,7 +81,6 @@ fun MainScreen(
                     modifier = Modifier
                         .offset(y = 28.dp),
                     onCamera = {
-                        bottomNavController.navigate(Screen.MainRoute.CAMERA.route)
                         onNavigateToCamera()
                     }
                 )
