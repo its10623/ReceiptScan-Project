@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,25 +36,43 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cameraapp.R
+import com.example.cameraapp.presentation.contract.LoginContract
 import com.example.cameraapp.presentation.ui.component.PrimaryButton
 import com.example.cameraapp.presentation.ui.theme.Border
-import com.example.cameraapp.presentation.ui.theme.CameraAppTheme
 import com.example.cameraapp.presentation.ui.theme.Expense
 import com.example.cameraapp.presentation.ui.theme.Primary
 import com.example.cameraapp.presentation.ui.theme.TextSub
+import com.example.cameraapp.presentation.viewmodel.LoginViewModel
 
 @Composable
-@Preview
-fun LoginScreen() {
+fun LoginScreen(
+    viewModel: LoginViewModel = hiltViewModel(),
+    onNavigateToMain: (String) -> Unit,
+    onNavigateToFindPassword: (String) -> Unit,
+    onNavigateToSignUp: () -> Unit,
+    isPasswordVisible: Boolean = false
+) {
     var email by remember { mutableStateOf("test@test.com") }
     var password by remember { mutableStateOf("test20260615!") }
 
-    var passwordVisible by remember { mutableStateOf(false) }
+    var passwordVisible by remember { mutableStateOf(isPasswordVisible) }
 
     val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(Unit) {
+        viewModel.uiSideEffect.collect { effect ->
+            when(effect) {
+                is LoginContract.SideEffect.NavigateToMain ->
+                    onNavigateToMain(effect.userKey)
+                is LoginContract.SideEffect.ShowError -> {
+
+                }
+            }
+        }
+    }
 
     Scaffold(
         modifier =
@@ -169,7 +188,7 @@ fun LoginScreen() {
                 singleLine = true,
                 isError = false,
                 visualTransformation =
-                    if (passwordVisible) {
+                    if (isPasswordVisible) {
                         VisualTransformation.None
                     } else {
                         PasswordVisualTransformation()
@@ -206,7 +225,7 @@ fun LoginScreen() {
                 horizontalArrangement = Arrangement.End,
             ) {
                 TextButton(
-                    onClick = {},
+                    onClick = { onNavigateToFindPassword(email) },
                 ) {
                     Text(
                         text = "비밀번호를 잊어버리셨나요?",
@@ -223,6 +242,7 @@ fun LoginScreen() {
                         .padding(32.dp),
                 enabled = email.isNotBlank() && password.isNotBlank(),
                 text = "로그인",
+                onClick = { onNavigateToMain(email) }
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -241,7 +261,7 @@ fun LoginScreen() {
                     style = MaterialTheme.typography.bodySmall,
                 )
                 TextButton(
-                    onClick = {},
+                    onClick = { onNavigateToSignUp() },
                     contentPadding = PaddingValues(0.dp),
                 ) {
                     Text(
