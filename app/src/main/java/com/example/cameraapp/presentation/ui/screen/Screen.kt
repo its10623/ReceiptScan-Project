@@ -14,10 +14,16 @@ sealed class Screen {
     data object Login : Screen()
 
     @Serializable
-    data object Main : Screen()
+    data class Main(val userKey: String) : Screen()
+
+    @Serializable
+    data object FindPassword : Screen()
 
     @Serializable
     data object Camera : Screen()
+
+    @Serializable
+    data object Scanning : Screen()
 
     @Serializable
     data object ScanResult : Screen()
@@ -25,13 +31,6 @@ sealed class Screen {
     @Serializable
     data object ResultEdit : Screen()
 
-    enum class MainRoute(val route: Any) {
-        LOGIN(Login),
-        MAIN(Main),
-        CAMERA(Camera),
-        SCAN_RESULT(ScanResult),
-        RESULT_EDIT(ResultEdit)
-    }
 
     @Serializable
     sealed class Bottom {
