@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cameraapp"
+    namespace = "com.smoothsm.cameraapp"
     compileSdk = 35
 
     defaultConfig {
